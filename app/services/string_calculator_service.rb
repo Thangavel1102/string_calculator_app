@@ -12,6 +12,9 @@ class StringCalculatorService
     
     numbers = numbers.map(&:to_i)
 
+    negatives = numbers.select { |n| n < 0 }
+    raise "Negative numbers are not allowed #{negatives.join(',')}" if negatives.any?
+
     numbers.sum
   end
 end
