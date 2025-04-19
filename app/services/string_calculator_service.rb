@@ -1,11 +1,17 @@
 class StringCalculatorService
   def self.add(input)
     return 0 if input.strip.empty?
-    
-    numbers = input.split(/[,\n]/)
+
+    if input.start_with?("//")
+      delimiter_part, numbers_part = input.split("\n")
+      delimiter = Regexp.escape(delimiter_part[2..])
+      numbers = numbers_part.split(delimiter)
+    else
+      numbers = input.split(/[,\n]/)
+    end
     
     numbers = numbers.map(&:to_i)
-   
+
     numbers.sum
   end
 end
